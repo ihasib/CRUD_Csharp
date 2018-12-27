@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2019
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Level2_DatabaseByCsharp", "Level2_DatabaseByCsharp\Level2_DatabaseByCsharp.csproj", "{F139A893-EFF3-49A8-9D79-2CF4980A64A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F139A893-EFF3-49A8-9D79-2CF4980A64A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F139A893-EFF3-49A8-9D79-2CF4980A64A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F139A893-EFF3-49A8-9D79-2CF4980A64A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F139A893-EFF3-49A8-9D79-2CF4980A64A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {383F535A-6225-43BB-9B40-8A212670B99C}
+	EndGlobalSection
+EndGlobal
