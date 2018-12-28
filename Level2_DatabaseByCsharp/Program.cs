@@ -10,6 +10,11 @@ namespace Level2_DatabaseByCsharp
     {
         static void Main(string[] args)
         {
+            //tasks in brief
+            //connect app to the server's database
+            //fetch data from server's database
+            //display data on the console display
+
         }
     }
 }
