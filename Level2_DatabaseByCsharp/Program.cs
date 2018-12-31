@@ -15,6 +15,15 @@ namespace Level2_DatabaseByCsharp
             //fetch data from server's database
             //display data on the console display
 
+            VirtualTraineesDBEntities db = new VirtualTraineesDBEntities();
+
+            List<Department> deptList = db.Departments.ToList();
+
+            foreach(Department dIndex in deptList)
+            {
+                Console.WriteLine(dIndex.Name);
+            }
+            Console.Read();
         }
     }
 }
