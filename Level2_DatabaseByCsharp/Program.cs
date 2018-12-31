@@ -16,8 +16,9 @@ namespace Level2_DatabaseByCsharp
             //display data on the console display
 
             VirtualTraineesDBEntities db = new VirtualTraineesDBEntities();
+            var deptSet = db.Departments;
 
-            List<Department> deptList = db.Departments.ToList();
+            List<Department> deptList = deptSet.ToList();
 
             foreach(Department dIndex in deptList)
             {
