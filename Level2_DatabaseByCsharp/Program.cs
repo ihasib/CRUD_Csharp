@@ -16,11 +16,14 @@ namespace Level2_DatabaseByCsharp
             //display data on the console display
 
             VirtualTraineesDBEntities db = new VirtualTraineesDBEntities();
-            var deptSet = db.Departments;
+            //var deptSet = db.Departments;
+            var traineeSet = db.Trainees;
+            //var traineeCSESet = traineeSet.Where(x=>x.DeptId=="3"); //var and Iqueryble both work
+            IQueryable<Trainee> traineeCSESet = traineeSet.Where(x => x.DeptId == "3");
+            //List<Department> deptList = deptSet.ToList();
+            List<Trainee> traineeList = traineeCSESet.ToList();
 
-            List<Department> deptList = deptSet.ToList();
-
-            foreach(Department dIndex in deptList)
+            foreach (Trainee dIndex in traineeList)
             {
                 Console.WriteLine(dIndex.Name);
             }
