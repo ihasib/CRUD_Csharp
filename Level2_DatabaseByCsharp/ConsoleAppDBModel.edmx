@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="VirtualTraineesDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="VirtualTraineesDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Course">
           <Key>
             <PropertyRef Name="Id" />
@@ -18,6 +18,7 @@
           </Key>
           <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="EntryAt" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Enrollment">
           <Key>
@@ -90,8 +91,7 @@
             <End Role="Trainee" EntitySet="Trainee" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="VirtualTraineesDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -102,14 +102,6 @@
           <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Enrollments" Relationship="Self.FK_Enrollment_Course" FromRole="Course" ToRole="Enrollment" />
-        </EntityType>
-        <EntityType Name="Department">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Trainees" Relationship="Self.FK_Trainee_Department" FromRole="Department" ToRole="Trainee" />
         </EntityType>
         <EntityType Name="Enrollment">
           <Key>
@@ -129,8 +121,8 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DeptId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Department" Relationship="Self.FK_Trainee_Department" FromRole="Trainee" ToRole="Department" />
           <NavigationProperty Name="Enrollments" Relationship="Self.FK_Enrollment_Trainee" FromRole="Trainee" ToRole="Enrollment" />
+          <NavigationProperty Name="Department" Relationship="VirtualTraineesDBModel.FK_Trainee_Department" FromRole="Trainee" ToRole="Department" />
         </EntityType>
         <Association Name="FK_Enrollment_Course">
           <End Role="Course" Type="Self.Course" Multiplicity="1" />
@@ -141,18 +133,6 @@
             </Principal>
             <Dependent Role="Enrollment">
               <PropertyRef Name="CourseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Trainee_Department">
-          <End Role="Department" Type="Self.Department" Multiplicity="1" />
-          <End Role="Trainee" Type="Self.Trainee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Trainee">
-              <PropertyRef Name="DeptId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -170,22 +150,43 @@
         </Association>
         <EntityContainer Name="VirtualTraineesDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Courses" EntityType="Self.Course" />
-          <EntitySet Name="Departments" EntityType="Self.Department" />
           <EntitySet Name="Enrollments" EntityType="Self.Enrollment" />
           <EntitySet Name="Trainees" EntityType="Self.Trainee" />
           <AssociationSet Name="FK_Enrollment_Course" Association="Self.FK_Enrollment_Course">
             <End Role="Course" EntitySet="Courses" />
             <End Role="Enrollment" EntitySet="Enrollments" />
           </AssociationSet>
-          <AssociationSet Name="FK_Trainee_Department" Association="Self.FK_Trainee_Department">
-            <End Role="Department" EntitySet="Departments" />
-            <End Role="Trainee" EntitySet="Trainees" />
-          </AssociationSet>
           <AssociationSet Name="FK_Enrollment_Trainee" Association="Self.FK_Enrollment_Trainee">
             <End Role="Trainee" EntitySet="Trainees" />
             <End Role="Enrollment" EntitySet="Enrollments" />
           </AssociationSet>
+          <EntitySet Name="Departments" EntityType="VirtualTraineesDBModel.Department" />
+          <AssociationSet Name="FK_Trainee_Department" Association="VirtualTraineesDBModel.FK_Trainee_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Trainee" EntitySet="Trainees" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EntryAt" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Trainees" Relationship="VirtualTraineesDBModel.FK_Trainee_Department" FromRole="Department" ToRole="Trainee" />
+        </EntityType>
+        <Association Name="FK_Trainee_Department">
+          <End Type="VirtualTraineesDBModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="VirtualTraineesDBModel.Trainee" Role="Trainee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trainee">
+              <PropertyRef Name="DeptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -195,14 +196,6 @@
           <EntitySetMapping Name="Courses">
             <EntityTypeMapping TypeName="VirtualTraineesDBModel.Course">
               <MappingFragment StoreEntitySet="Course">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Departments">
-            <EntityTypeMapping TypeName="VirtualTraineesDBModel.Department">
-              <MappingFragment StoreEntitySet="Department">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
@@ -224,6 +217,15 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Adress" ColumnName="Adress" />
                 <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="VirtualTraineesDBModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="EntryAt" ColumnName="EntryAt" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

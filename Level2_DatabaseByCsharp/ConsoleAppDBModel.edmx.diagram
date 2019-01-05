@@ -6,12 +6,12 @@
     <edmx:Diagrams>
       <Diagram DiagramId="b93c35729ea746d0aca64e9ab405894b" Name="Diagram1">
         <EntityTypeShape EntityType="VirtualTraineesDBModel.Course" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="VirtualTraineesDBModel.Department" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="VirtualTraineesDBModel.Enrollment" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="VirtualTraineesDBModel.Trainee" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="VirtualTraineesDBModel.FK_Enrollment_Course" ManuallyRouted="false" />
-        <AssociationConnector Association="VirtualTraineesDBModel.FK_Trainee_Department" ManuallyRouted="false" />
         <AssociationConnector Association="VirtualTraineesDBModel.FK_Enrollment_Trainee" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="VirtualTraineesDBModel.Department" Width="1.5" PointX="0.75" PointY="1.125" />
+        <AssociationConnector Association="VirtualTraineesDBModel.FK_Trainee_Department" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -26,8 +26,8 @@ namespace Level2_DatabaseByCsharp
         }
     
         public virtual DbSet<Course> Courses { get; set; }
-        public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Enrollment> Enrollments { get; set; }
         public virtual DbSet<Trainee> Trainees { get; set; }
+        public virtual DbSet<Department> Departments { get; set; }
     }
 }

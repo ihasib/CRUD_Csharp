@@ -22,6 +22,7 @@ namespace Level2_DatabaseByCsharp
     
         public string Id { get; set; }
         public string Name { get; set; }
+        public string EntryAt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Trainee> Trainees { get; set; }

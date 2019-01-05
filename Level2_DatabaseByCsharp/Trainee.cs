@@ -25,8 +25,8 @@ namespace Level2_DatabaseByCsharp
         public string Adress { get; set; }
         public string DeptId { get; set; }
     
-        public virtual Department Department { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Enrollment> Enrollments { get; set; }
+        public virtual Department Department { get; set; }
     }
 }
