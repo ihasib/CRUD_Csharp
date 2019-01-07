@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace Level2_DatabaseByCsharp
 {
@@ -18,8 +19,10 @@ namespace Level2_DatabaseByCsharp
             VirtualTraineesDBEntities db = new VirtualTraineesDBEntities();
             var deptSet = db.Departments;
 
-            DateTime date = new DateTime(1964, 1, 1);
-            IQueryable<Department> deptBirth = deptSet.Where(x => x.EntryAt > date);
+            DateTime date = new DateTime(1963, 1, 2);
+            IQueryable<Department> deptBirth1 = deptSet.Include(xx=>xx.Trainees).Where(x => x.EntryAt > date);
+            //deptSet.Include(x=>x.;
+            IQueryable<Department> deptBirth = deptBirth1.OrderBy(x => x.EntryAt);
 
             List<Department> deptList = deptBirth.ToList();
 
