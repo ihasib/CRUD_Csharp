@@ -18,7 +18,7 @@
           </Key>
           <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="EntryAt" Type="nchar" MaxLength="10" />
+          <Property Name="EntryAt" Type="datetime" />
         </EntityType>
         <EntityType Name="Enrollment">
           <Key>
@@ -172,7 +172,7 @@
           </Key>
           <Property Name="Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="EntryAt" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="EntryAt" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Trainees" Relationship="VirtualTraineesDBModel.FK_Trainee_Department" FromRole="Department" ToRole="Trainee" />
         </EntityType>
         <Association Name="FK_Trainee_Department">
